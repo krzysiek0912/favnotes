@@ -1,22 +1,29 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "env": {
-    "jest": true,
-    "browser": true
-  },
-  "rules": {
-    "no-use-before-define": [
-      1,
-      {
-        "functions": true,
-        "classes": true
-      }
-    ],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js"]
-      }
-    ]
-  }
+    "extends": ["airbnb", "prettier", "prettier/react"],
+    "env": {
+        "jest": true,
+        "browser": true
+    },
+    "rules": {
+        "no-use-before-define": [
+            1,
+            {
+                "functions": true,
+                "classes": true
+            }
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js"]
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            }
+        }
+    }
 }
