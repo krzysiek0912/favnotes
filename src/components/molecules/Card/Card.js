@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import { removeItemAction } from 'reducers/rootReducers';
 import { pageTypesName } from 'config';
 
 const { twitters, articles, notes } = pageTypesName;
@@ -81,7 +83,16 @@ class Card extends Component {
     handleCardClick = () => this.setState({ redirect: true });
 
     render() {
-        const { id, cardType, title, created, twitterName, articleUrl, content } = this.props;
+        const {
+            removeItem,
+            id,
+            cardType,
+            title,
+            created,
+            twitterName,
+            articleUrl,
+            content,
+        } = this.props;
         const { redirect } = this.state;
 
         if (redirect) {
@@ -99,7 +110,9 @@ class Card extends Component {
                 </InnerWrapper>
                 <InnerWrapper flex>
                     <Paragraph>{content}</Paragraph>
-                    <Button secondary>REMOVE</Button>
+                    <Button onClick={() => removeItem(cardType, id)} secondary>
+                        REMOVE
+                    </Button>
                 </InnerWrapper>
             </StyledWrapper>
         );
@@ -107,6 +120,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+    removeItem: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     cardType: PropTypes.oneOf([twitters, articles, notes]),
     title: PropTypes.string.isRequired,
@@ -122,4 +136,8 @@ Card.defaultProps = {
     articleUrl: null,
 };
 
-export default Card;
+const mapDispatchToProps = (dispatch) => ({
+    removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+});
+
+export default connect(null, mapDispatchToProps)(Card);
