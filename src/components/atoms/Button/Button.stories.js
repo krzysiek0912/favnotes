@@ -15,15 +15,15 @@ export default {
 export const primary = () => {
     const label = 'Colors';
     const options = {
-        Notes: 'note',
-        Twitters: 'twitter',
-        Articles: 'article',
+        Notes: 'notes',
+        Twitters: 'twitters',
+        Articles: 'articles',
     };
     const defaultValue = 'notes';
     const groupId = 'GROUP-ID1';
 
     const value = select(label, options, defaultValue, groupId);
-    return <Button theme={value}>Hello World</Button>;
+    return <Button activeColor={value}>Hello World</Button>;
 };
 
 export const secondary = () => <Button secondary>Remove</Button>;
