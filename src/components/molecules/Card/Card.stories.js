@@ -16,5 +16,5 @@ const obj = {
     key: '1',
 };
 export const Note = () => <Card {...obj} />;
-export const Twitter = () => <Card cardType="twitters" {...obj} />;
-export const Article = () => <Card cardType="articles" {...obj} />;
+export const Twitter = () => <Card pageContext="twitters" {...obj} />;
+export const Article = () => <Card pageContext="articles" {...obj} />;
