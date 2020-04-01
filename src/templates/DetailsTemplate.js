@@ -6,9 +6,7 @@ import UserPageTemplate from 'templates/UserPageTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
-import { pageTypesName } from 'config';
-
-const { twitters, articles } = pageTypesName;
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
     padding: 25px 150px 25px 70px;
@@ -53,8 +51,8 @@ const StyledImage = styled.img`
     border-radius: 50%;
 `;
 
-const DetailsTemplate = ({ pageType, title, created, content, articleUrl, twitterName }) => (
-    <UserPageTemplate pageType={pageType}>
+const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twitterName }) => (
+    <UserPageTemplate pageType={pageContext}>
         <StyledWrapper>
             <StyledPageHeader>
                 <StyledHeading big as="h1">
@@ -63,11 +61,11 @@ const DetailsTemplate = ({ pageType, title, created, content, articleUrl, twitte
                 <StyledParagraph>{created}</StyledParagraph>
             </StyledPageHeader>
             <Paragraph>{content}</Paragraph>
-            {pageType === articles && <StyledLink href={articleUrl}>Open article</StyledLink>}
-            {pageType === twitters && (
+            {pageContext === 'articles' && <StyledLink href={articleUrl}>Open article</StyledLink>}
+            {pageContext === 'twitters' && (
                 <StyledImage alt={title} src={`https://avatars.io/twitter/${twitterName}`} />
             )}
-            <Button as={Link} to={`/${pageType}`} activeColor={pageType}>
+            <Button as={Link} to={`/${pageContext}`} activeColor={pageContext}>
                 save / close
             </Button>
         </StyledWrapper>
@@ -75,7 +73,7 @@ const DetailsTemplate = ({ pageType, title, created, content, articleUrl, twitte
 );
 
 DetailsTemplate.propTypes = {
-    pageType: PropTypes.string.isRequired,
+    pageContext: PropTypes.string.isRequired,
     title: PropTypes.string,
     created: PropTypes.string,
     content: PropTypes.string,
@@ -91,4 +89,4 @@ DetailsTemplate.defaultProps = {
     twitterName: '',
 };
 
-export default DetailsTemplate;
+export default withContext(DetailsTemplate);
