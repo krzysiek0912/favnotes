@@ -1,5 +1,6 @@
 import React from 'react';
 import { withKnobs, select } from '@storybook/addon-knobs';
+import { pageTypesName } from 'config';
 import Button from './Button';
 
 export default {
@@ -12,15 +13,12 @@ export default {
 // You can also configure `withKnobs` as a global decorator.
 
 // Knobs as dynamic variables.
-export const primary = () => {
+export const primary = (props) => {
+    console.log('Props', props);
     const label = 'Colors';
-    const options = {
-        Notes: 'notes',
-        Twitters: 'twitters',
-        Articles: 'articles',
-    };
+    const options = pageTypesName;
     const defaultValue = 'notes';
-    const groupId = 'GROUP-ID1';
+    const groupId = 'Theme';
 
     const value = select(label, options, defaultValue, groupId);
     return <Button activeColor={value}>Hello World</Button>;

@@ -1,21 +1,21 @@
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { pageTypesName } from 'config';
-import Sidebar from './Sidebar';
+import NewItemBar from './NewItemBar';
 
 export default {
-    component: Sidebar,
-    title: 'Organisms/Sidebar',
-    decorators: [withKnobs, StoryRouter()],
+    component: NewItemBar,
+    title: 'Organisms/NewItemBar',
+    decorators: [withKnobs],
+    // decorators: [(storyFn) => <Router>{storyFn()}</Router>],
 };
 
 export const Normal = () => {
     const label = 'Colors';
     const options = pageTypesName;
-    const defaultValue = pageTypesName.notes;
+    const defaultValue = pageTypesName.Notes;
     const groupId = 'Theme';
 
     const value = select(label, options, defaultValue, groupId);
-    return <Sidebar pageContext={value} />;
+    return <NewItemBar pageContext={value} isVisible />;
 };
