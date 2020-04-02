@@ -59,7 +59,7 @@ class GridTemplate extends Component {
         isNewItemBarVisible: false,
     };
 
-    handleNewItemBarToggle = () => {
+    toggleNewItemBar = () => {
         this.setState((prevState) => ({
             isNewItemBarVisible: !prevState.isNewItemBarVisible,
         }));
@@ -81,11 +81,14 @@ class GridTemplate extends Component {
                     </StyledPageHeader>
                     <StyledGrid>{children}</StyledGrid>
                     <StyledButtonIcon
-                        onClick={this.handleNewItemBarToggle}
+                        onClick={this.toggleNewItemBar}
                         icon={plusIcon}
                         activecolor={pageContext}
                     />
-                    <NewItemBar isVisible={isNewItemBarVisible} />
+                    <NewItemBar
+                        handleClose={this.toggleNewItemBar}
+                        isVisible={isNewItemBarVisible}
+                    />
                 </StyledWrapper>
             </UserPageTemplate>
         );
